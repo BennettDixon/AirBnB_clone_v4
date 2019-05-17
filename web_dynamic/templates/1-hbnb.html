@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css', cache_id=cache_id) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css', cache_id=cache_id) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css', cache_id=cache_id) }}">
-    <script src="https://code.jquery.com/jquery-3.2.1-min.js"></script>
-    <script src="static/scripts/1-hbnb.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/1-hbnb.js', cache_id=cache_id) }}"></script>
   </head>
 
   <!-- **********************
@@ -76,10 +76,11 @@
 	    <ul class="popover">
 	      {% for amenity in amens|sort(attribute='name') %}
 	      <LI><input
+             class="amenity_checkbox"
 		     type=checkbox
 		     style="margin-right: 10px;"
-		     data-id=":amenity_id"
-		     data-name=":amenity_name"></input>
+		     data-id="{{ amenity.id }}"
+		     data-name="{{ amenity.name }}"></input>
 		{{ amenity.name }}</LI>
 	      {% endfor %}
 	    </ul>
