@@ -12,14 +12,19 @@ $(document).ready(function () {
       } else {
         amenities.push(amenity_id);
       }
-      console.log(amenities);
     });
-  $.get("http://0.0.0.0:5001/api/v1/status", function (data, status) {
+  let request = $.get("http://0.0.0.0:5001/api/v1/status");
+  request.done(function (data) {
     console.log(data['status'])
     if (data['status'] === 'OK') {
       $('#api_status').addClass('available');
     } else {
+      console.log('removing class');
       $('#api_status').removeClass('available');
     }
+  });
+  request.fail(function (jqXHR, textStatus, errorThrown) {
+    console.log(jqXHR, textStatus, errorThrown);
+    $('#api_status').removeClass('available');
   });
 });

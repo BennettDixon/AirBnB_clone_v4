@@ -15,13 +15,18 @@ $(document).ready(function () {
     }
     console.log(amenities);
   });
-  $.get('http://0.0.0.0:5001/api/v1/status', function (data, status) {
+  let request = $.get('http://0.0.0.0:5001/api/v1/status');
+  request.done(function (data, status) {
     console.log(data['status']);
     if (data['status'] === 'OK') {
       $('#api_status').addClass('available');
     } else {
       $('#api_status').removeClass('available');
     }
+  });
+  request.fail(function (jqXHR, textStatus, errorThrown) {
+    console.log(jqXHR, textStatus, errorThrown);
+    $('#api_status').removeClass('available');
   });
   updatePlaces();
   $('button').click(updatePlaces);
