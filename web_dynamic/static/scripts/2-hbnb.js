@@ -13,7 +13,7 @@ $(document).ready(function () {
         amenities.push(amenity_id);
       }
     });
-  let request = $.get("http://0.0.0.0:5001/api/v1/status");
+  let request = $.get("/api/v1/status");
   request.done(function (data) {
     console.log(data['status'])
     if (data['status'] === 'OK') {
